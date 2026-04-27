@@ -1,0 +1,59 @@
+{
+  "name": "any-code-fingerprint",
+  "version": "0.1.3",
+  "description": "Deterministic code snippet fingerprinting for Node.js and browsers",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "browser": "./dist/index.browser.js",
+  "bin": {
+    "acf": "./dist/cli.cjs"
+  },
+  "jsdelivr": "./dist/index.mjs",
+  "unpkg": "./dist/index.browser.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./node": {
+      "import": "./dist/node.mjs",
+      "require": "./dist/node.cjs"
+    },
+    "./browser": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./global": "./dist/index.browser.js",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && rollup -c",
+    "test": "node --test",
+    "benchmark": "node ./benchmarks/find-similar.benchmark.mjs",
+    "build-mac-cli": "node ./scripts/cli/build-cli.mjs --platform macos",
+    "build-linux-cli": "node ./scripts/cli/build-cli.mjs --platform linux",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "fingerprint",
+    "code-similarity",
+    "clone-detection",
+    "snippet",
+    "static-analysis"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "pkg": "^5.8.1",
+    "rollup": "^4.52.4"
+  }
+}
