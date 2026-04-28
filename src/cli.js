@@ -37,14 +37,15 @@ function parseIntStrict(value, name) {
 
 function parseWeights(value) {
   const weights = parseCsv(value).map((item) => parseNumber(item, '--weights'));
-  if (weights.length !== 4) {
-    throw new Error('--weights must have exactly 4 comma-separated values');
+  if (weights.length !== 4 && weights.length !== 5) {
+    throw new Error('--weights must have 4 or 5 comma-separated values (g,l,o,t[,b])');
   }
   return {
     wGlobal: weights[0],
     wLocal: weights[1],
     wOrder: weights[2],
-    wType: weights[3]
+    wType: weights[3],
+    ...(weights.length === 5 ? { wBigram: weights[4] } : {})
   };
 }
 
@@ -70,8 +71,8 @@ function printCompareTable(result) {
 function printFindTable(payload) {
   console.log(`scanned: ${payload.scannedFiles}  matched: ${payload.matchedFiles}  errors: ${payload.errors.length}`);
   console.log('');
-  console.log('rank  score      sim_global  sim_local   sim_order   sim_type    path');
-  console.log('----  ---------  ----------  ----------  ----------  ----------  ----');
+  console.log('rank  score      sim_global  sim_local   sim_order   sim_type    sim_bigram  path');
+  console.log('----  ---------  ----------  ----------  ----------  ----------  ----------  ----');
 
   payload.results.forEach((row, index) => {
     const rank = String(index + 1).padEnd(4, ' ');
@@ -80,7 +81,8 @@ function printFindTable(payload) {
     const sl = formatNumber(row.sim_local_alignment).padEnd(10, ' ');
     const so = formatNumber(row.sim_order).padEnd(10, ' ');
     const st = formatNumber(row.sim_type).padEnd(10, ' ');
-    console.log(`${rank}  ${score}  ${sg}  ${sl}  ${so}  ${st}  ${row.path}`);
+    const sb = formatNumber(row.sim_bigram).padEnd(10, ' ');
+    console.log(`${rank}  ${score}  ${sg}  ${sl}  ${so}  ${st}  ${sb}  ${row.path}`);
   });
 
   if (payload.errors.length > 0) {
@@ -200,7 +202,7 @@ Common options:
 
 compare options:
   --format json|table             (default: json)
-  --weights g,l,o,t               (example: 0.4,0.3,0.15,0.15)
+  --weights g,l,o,t[,b]           (example: 0.4,0.3,0.15,0.15,0.2)
 
 find options:
   --top-k <n>                     (default: 20)

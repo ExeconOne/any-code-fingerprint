@@ -6,7 +6,8 @@ import { compareSnippetFingerprints } from '../core/scorer.js';
 const DEFAULT_EXTENSIONS = [
   '.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx',
   '.py', '.java', '.cs', '.cpp', '.c', '.h', '.hpp',
-  '.go', '.php', '.rb', '.rs', '.kt', '.swift', '.scala'
+  '.go', '.php', '.rb', '.rs', '.kt', '.swift', '.scala',
+  '.json'
 ];
 
 const DEFAULT_EXCLUDE_DIRS = new Set([
