@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { readFile, stat } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';

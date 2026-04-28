@@ -164,7 +164,35 @@ Build outputs:
 - `dist/index.cjs`
 - `dist/node.mjs`
 - `dist/node.cjs`
+- `dist/cli.mjs`
+- `dist/cli.cjs`
 - `dist/index.browser.js`
+
+## CLI Usage
+
+```bash
+acf compare fileA.js fileB.js
+acf find snippet.js ./src --top-k 20
+acf fingerprint file.js
+```
+
+## CLI Binary Builds (manual)
+
+Build a native CLI binary on each machine:
+
+```bash
+# on macOS
+npm run build-mac-cli
+
+# on Linux
+npm run build-linux-cli
+```
+
+Artifacts are generated under:
+- `artifacts/cli/v<version>/acf-macos-<arch>` or `acf-linux-<arch>`
+- `artifacts/cli/v<version>/*.tar.gz`
+- `artifacts/cli/v<version>/*.tar.gz.sha256`
+
 
 ## Quick Performance Benchmark
 

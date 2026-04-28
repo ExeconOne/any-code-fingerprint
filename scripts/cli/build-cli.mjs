@@ -55,11 +55,11 @@ function run(command, commandArgs, cwd = projectRoot) {
 
 function resolvePkgRunner() {
   const localPkg = path.join(projectRoot, 'node_modules', '.bin', 'pkg');
-  if (existsSync(localPkg)) {
-    return { command: localPkg, argsPrefix: [] };
+  if (!existsSync(localPkg)) {
+    console.error('Missing local pkg binary. Run `npm install` in any-code-fingerprint first.');
+    process.exit(2);
   }
-
-  return { command: 'npx', argsPrefix: ['--yes', 'pkg@5.8.1'] };
+  return localPkg;
 }
 
 function sha256File(filePath) {
@@ -84,9 +84,8 @@ console.log('[build-cli] building dist artifacts...');
 run('npm', ['run', 'build']);
 
 const pkgRunner = resolvePkgRunner();
-console.log(`[build-cli] using pkg runner: ${pkgRunner.command}`);
-run(pkgRunner.command, [
-  ...pkgRunner.argsPrefix,
+console.log(`[build-cli] using pkg runner: ${pkgRunner}`);
+run(pkgRunner, [
   'dist/cli.cjs',
   '--targets',
   pkgTarget,
