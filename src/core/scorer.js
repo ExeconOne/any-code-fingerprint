@@ -58,6 +58,15 @@ function typeSim(profileA, profileB) {
 }
 
 function bigramSim(profileA, profileB) {
+  const len = Math.min(profileA.length, profileB.length);
+  let normA = 0;
+  let normB = 0;
+  for (let i = 0; i < len; i += 1) {
+    normA += profileA[i] * profileA[i];
+    normB += profileB[i] * profileB[i];
+  }
+  if (normA < 1e-12 && normB < 1e-12) return 0.5;
+  if (normA < 1e-12 || normB < 1e-12) return 0.0;
   return rawCos(profileA, profileB);
 }
 

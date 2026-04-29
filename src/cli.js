@@ -68,6 +68,21 @@ function printCompareTable(result) {
   console.log(`sim_type             ${formatNumber(result.sim_type)}`);
 }
 
+function printFindPaths(payload) {
+  payload.results.forEach((row) => {
+    console.log(row.path);
+  });
+
+  if (payload.errors.length > 0) {
+    payload.errors.slice(0, 10).forEach((item) => {
+      console.error(`acf: ${item.path}: ${item.message}`);
+    });
+    if (payload.errors.length > 10) {
+      console.error(`acf: ... and ${payload.errors.length - 10} more errors`);
+    }
+  }
+}
+
 function printFindTable(payload) {
   console.log(`scanned: ${payload.scannedFiles}  matched: ${payload.matchedFiles}  errors: ${payload.errors.length}`);
   console.log('');
@@ -212,7 +227,7 @@ find options:
   --max-file-size <bytes>         (default: 512000)
   --concurrency <n>               (default: 8)
   --relative | --absolute         (default: absolute)
-  --format json|table             (default: table)
+  --format paths|table|json       (default: paths)
 
 fingerprint options:
   --format summary|json           (default: summary)
@@ -295,9 +310,9 @@ async function runFind(args) {
     throw new Error('find requires exactly 2 positional arguments: <queryFile> <rootDir>');
   }
 
-  const format = options.get('--format') || 'table';
-  if (!['json', 'table'].includes(format)) {
-    throw new Error('--format for find must be json or table');
+  const format = options.get('--format') || 'paths';
+  if (!['paths', 'table', 'json'].includes(format)) {
+    throw new Error('--format for find must be paths, table, or json');
   }
 
   const query = await readCodeFile(positionals[0]);
@@ -325,7 +340,12 @@ async function runFind(args) {
     return;
   }
 
-  printJson(payload, flags.has('--pretty'));
+  if (format === 'json') {
+    printJson(payload, flags.has('--pretty'));
+    return;
+  }
+
+  printFindPaths(payload);
 }
 
 async function runFingerprint(args) {

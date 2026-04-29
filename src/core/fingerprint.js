@@ -121,7 +121,7 @@ export function snippetFingerprint(code, opts = {}) {
 
   const orderSignature = computeOrderSignature(tokenTypes);
   const typeProfile = computeTypeProfile(tokenTypes, numWindows);
-  const bigramProfile = computeBigramProfile(encodingTokens);
+  const bigramProfile = computeBigramProfile(rawTokens);
 
   return {
     global,

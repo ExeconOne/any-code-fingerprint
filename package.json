@@ -1,7 +1,7 @@
 {
   "name": "any-code-fingerprint",
   "version": "0.1.3",
-  "description": "Deterministic code snippet fingerprinting for Node.js and browsers",
+  "description": "Deterministic source code fingerprinting, snippet hashing, and code similarity detection for Node.js and browsers",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -45,11 +45,26 @@
     "node": ">=18"
   },
   "keywords": [
+    "code",
+    "source-code",
     "fingerprint",
+    "fingerprinting",
+    "code-fingerprint",
+    "source-code-fingerprint",
+    "snippet-fingerprint",
+    "snippet-hashing",
     "code-similarity",
+    "source-code-similarity",
+    "similarity",
     "clone-detection",
-    "snippet",
-    "static-analysis"
+    "duplicate-code",
+    "near-duplicate",
+    "static-analysis",
+    "plagiarism-detection",
+    "hashing",
+    "ast",
+    "node",
+    "browser"
   ],
   "license": "UNLICENSED",
   "devDependencies": {

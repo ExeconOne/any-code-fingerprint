@@ -1,6 +1,6 @@
 # any-code-fingerprint
 
-Deterministic source-code fingerprinting for snippet similarity.
+Deterministic source code fingerprinting, snippet hashing, and code (any programming language) similarity detection for Node.js and browsers
 
 The package supports:
 - Node.js (ESM and CommonJS)
@@ -168,17 +168,49 @@ Build outputs:
 - `dist/cli.cjs`
 - `dist/index.browser.js`
 
-## CLI Usage
+## CLI
+
+### Install pre-built binary
+
+Download and install the binary for your platform from the `artifacts/cli/v<version>/` directory.
+
+**macOS (Apple Silicon)**
 
 ```bash
-acf compare fileA.js fileB.js
-acf find snippet.js ./src --top-k 20
-acf fingerprint file.js
+VERSION=0.1.3
+curl -LO "https://github.com/your-org/any-code-fingerprint/releases/download/v${VERSION}/acf-macos-arm64.tar.gz"
+tar -xzf acf-macos-arm64.tar.gz
+chmod +x acf-macos-arm64
+sudo mv acf-macos-arm64 /usr/local/bin/acf
 ```
 
-## CLI Binary Builds (manual)
+**macOS (Intel)**
 
-Build a native CLI binary on each machine:
+```bash
+VERSION=0.1.3
+curl -LO "https://github.com/your-org/any-code-fingerprint/releases/download/v${VERSION}/acf-macos-x64.tar.gz"
+tar -xzf acf-macos-x64.tar.gz
+chmod +x acf-macos-x64
+sudo mv acf-macos-x64 /usr/local/bin/acf
+```
+
+**Linux (x64)**
+
+```bash
+VERSION=0.1.3
+curl -LO "https://github.com/your-org/any-code-fingerprint/releases/download/v${VERSION}/acf-linux-x64.tar.gz"
+tar -xzf acf-linux-x64.tar.gz
+chmod +x acf-linux-x64
+sudo mv acf-linux-x64 /usr/local/bin/acf
+```
+
+Verify the download using the provided `.sha256` checksum:
+
+```bash
+shasum -a 256 -c acf-macos-arm64.tar.gz.sha256
+```
+
+### Build binary locally
 
 ```bash
 # on macOS
@@ -188,10 +220,111 @@ npm run build-mac-cli
 npm run build-linux-cli
 ```
 
-Artifacts are generated under:
-- `artifacts/cli/v<version>/acf-macos-<arch>` or `acf-linux-<arch>`
-- `artifacts/cli/v<version>/*.tar.gz`
-- `artifacts/cli/v<version>/*.tar.gz.sha256`
+Artifacts are generated under `artifacts/cli/v<version>/`.
+
+### Commands
+
+```
+acf compare <fileA> <fileB> [options]
+acf find <queryFile> <rootDir> [options]
+acf fingerprint <file> [options]
+```
+
+#### `find` — search for similar files
+
+Default output is one path per line, sorted by similarity (most similar first):
+
+```bash
+acf find snippet.js ./src
+```
+
+```
+/home/user/project/src/utils.js
+/home/user/project/src/helpers/string.js
+/home/user/project/src/lib/parse.js
+```
+
+Pipe-friendly — works with standard Unix tools:
+
+```bash
+acf find snippet.js ./src | head -5
+acf find snippet.js ./src | xargs grep "TODO"
+acf find snippet.js ./src --min-score 0.8 | wc -l
+```
+
+Use `--format table` for the full scored breakdown:
+
+```bash
+acf find snippet.js ./src --format table
+```
+
+```
+scanned: 142  matched: 38  errors: 0
+
+rank  score      sim_global  sim_local   sim_order   sim_type    sim_bigram  path
+----  ---------  ----------  ----------  ----------  ----------  ----------  ----
+1     0.921034   0.998122    0.991450    0.843200    0.812300    0.764100    /home/user/project/src/utils.js
+2     0.876541   0.987300    0.954200    0.801100    0.776400    0.712300    /home/user/project/src/helpers/string.js
+```
+
+Score components:
+
+| column | description |
+|---|---|
+| `score` | weighted average of all components |
+| `sim_global` | global image similarity (whole-file token encoding) |
+| `sim_local` | local window alignment similarity |
+| `sim_order` | token type ordering pattern similarity |
+| `sim_type` | token type distribution similarity |
+| `sim_bigram` | token bigram distribution similarity |
+
+Available options:
+
+```
+--top-k <n>              return at most N results (default: 20)
+--min-score <n>          minimum score threshold 0..1 (default: 0)
+--ext .js,.ts,.py        file extensions to scan
+--exclude dir1,dir2      directory names to skip
+--max-file-size <bytes>  skip files larger than this (default: 512000)
+--concurrency <n>        parallel workers (default: 8)
+--relative               output relative paths instead of absolute
+--format paths|table|json  output format (default: paths)
+--weights g,l,o,t[,b]   custom metric weights (default: 0.4,0.3,0.15,0.15,0.2)
+```
+
+#### `compare` — compare two files directly
+
+```bash
+acf compare fileA.js fileB.js --format table
+```
+
+```
+metric               value
+-------------------  ----------
+score                0.876541
+sim_global           0.987300
+sim_local_alignment  0.954200
+sim_order            0.801100
+sim_type             0.776400
+sim_bigram           0.712300
+```
+
+#### `fingerprint` — inspect a file's fingerprint
+
+```bash
+acf fingerprint file.js
+```
+
+```
+fingerprint summary
+-------------------
+tokens:        42
+numWindows:    4
+global shape:  64x64x3
+order bins:    16
+type bins:     16
+bigram bins:   64
+```
 
 
 ## Quick Performance Benchmark
