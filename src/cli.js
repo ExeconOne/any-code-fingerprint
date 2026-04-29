@@ -123,7 +123,10 @@ function printFingerprintSummary(payload) {
   console.log(`bigram bins:   ${payload.bigramProfileLength}`);
 }
 
+const EMBEDDED_VERSION = null; // replaced by build-cli.mjs for binary builds
+
 function readVersion() {
+  if (EMBEDDED_VERSION) return EMBEDDED_VERSION;
   try {
     const currentFile = fileURLToPath(import.meta.url);
     const currentDir = path.dirname(currentFile);

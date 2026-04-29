@@ -83,6 +83,17 @@ console.log(`[build-cli] target: ${pkgTarget}`);
 console.log('[build-cli] building dist artifacts...');
 run('npm', ['run', 'build']);
 
+const cliCjsPath = path.join(projectRoot, 'dist/cli.cjs');
+const cliContent = readFileSync(cliCjsPath, 'utf8');
+writeFileSync(
+  cliCjsPath,
+  cliContent.replace(
+    'const EMBEDDED_VERSION = null',
+    `const EMBEDDED_VERSION = '${packageJson.version}'`
+  )
+);
+console.log(`[build-cli] injected version ${packageJson.version} into dist/cli.cjs`);
+
 const pkgRunner = resolvePkgRunner();
 console.log(`[build-cli] using pkg runner: ${pkgRunner}`);
 run(pkgRunner, [
