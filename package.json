@@ -1,6 +1,6 @@
 {
   "name": "any-code-fingerprint",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Deterministic source code fingerprinting, snippet hashing, and code similarity detection for Node.js and browsers",
   "type": "module",
   "main": "./dist/index.cjs",
