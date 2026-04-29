@@ -1,24 +1,24 @@
 Architectures: amd64
 Codename: stable
 Components: main
-Date: Wed, 29 Apr 2026 14:25:28 +0000
+Date: Wed, 29 Apr 2026 15:18:47 +0000
 Description: acf CLI APT repository
 Label: acf
 Origin: ExeconOne
 Suite: stable
 MD5Sum:
- 61ac775b0daaa4a6a87d5d2192771a7a              172 Release
- ddce2195f7c6ec37256deb322aa0a02e             1008 main/binary-amd64/Packages
- 06fdc0f81442ccef6ad9b40aa8a96b3f              494 main/binary-amd64/Packages.gz
+ ac4e4bc609699c0d8b8941ee8f55e80d              172 Release
+ f63d64774d6e1691aa730d78c2e662bd             1513 main/binary-amd64/Packages
+ 2b1f3f27b05fe20ec8a6e9add421a990              596 main/binary-amd64/Packages.gz
 SHA1:
- 56701399e3452fe2b9c464f494ea653c18b2c7f0              172 Release
- 61a56fb418c9033d4eecf43406195f51f16fa3f2             1008 main/binary-amd64/Packages
- 5cfddecbd5212f670473355283fc061281d811e5              494 main/binary-amd64/Packages.gz
+ d8ee0fe12071b7ac36adef71a5da42b0f5c71199              172 Release
+ 03406d87c1a8b4686570a85d78ef28abebdd3539             1513 main/binary-amd64/Packages
+ 9c2909c05ffd8b7f2026ce349b3a7765c416e396              596 main/binary-amd64/Packages.gz
 SHA256:
- f8129f479145ed4daa6f801a8f9e41658073899e27839e7da36cba23e31cf92c              172 Release
- 6a9b521dc1949135bef498ad12a91f1b58ff3c3f551a44ad7ab8109f54c94778             1008 main/binary-amd64/Packages
- ccfd6845d75aaa0bc34244ff58e77a17cf60882ad5d5b9a88e168b3126120a8a              494 main/binary-amd64/Packages.gz
+ 9d8f97a19884b9b3238ef8dae552d792c14594d59e4f6c868fedc5a21d23dc27              172 Release
+ a6fbddca90bf10458ca65e3d7e63bee89a8bdad48073814a3f7a0bf8cba66677             1513 main/binary-amd64/Packages
+ a3bc22052dda92e3547452c7c57db93d57b04187073a64bed7d6b88d27cc1c60              596 main/binary-amd64/Packages.gz
 SHA512:
- c081e0ff5fcf538ad0f8b460f8c3c305d137fc1470acf60eb6a69394ddb26a57ef33ad0133b9291bc0b186588bfad400de1e8eedf2f8c00afe84da42a7c4761f              172 Release
- b0ec9901ce7ed32f7e1f0b1d6a0db1e04e5f56c23dbad1949b788b19d996227cdf0f5640d8678c260a0f5d02cd5524acfa7d14c05bb8a2946c8694fe400be464             1008 main/binary-amd64/Packages
- 8d9dd054638ecd7cd3027078a7e253eaa53de1dd15c9a5e9c458b3e70e91efbeffb54c94ef94556d46fb81413e3beb89c0e32bad8e1ae456760754a955b1e4e9              494 main/binary-amd64/Packages.gz
+ d863b796a5a6b4d8a769d118afeb91024f0e64c9698e5800586b0a061adbdff48295e80fa163b516a3a999d8e165ce10ce0f23be91056d2ca5362fe94987e5d4              172 Release
+ 88bcb9361f22525d6057bfe072533a737bfa62fadc8500a946228be453c577d993b8845459b332bb5f17b7057787e01f9eb2360fbbc2d6b03bf5f36700d8387b             1513 main/binary-amd64/Packages
+ 064cf9c2de2faa9133fd37313de04cad08d5f99663e35b3498b0509832d12a71cc3c8eae9b6259881f43b0c3dad261f401b9b3bcba1765161392e0788c3ced02              596 main/binary-amd64/Packages.gz

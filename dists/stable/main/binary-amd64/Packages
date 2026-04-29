@@ -12,6 +12,19 @@ Description: Source-code fingerprinting and similarity search CLI
  Deterministic code fingerprinting for any programming language.
 
 Package: acf
+Version: 0.1.12
+Architecture: amd64
+Maintainer: ExeconOne <maciej.grula@execon.pl>
+Filename: pool/main/acf_0.1.12_amd64.deb
+Size: 14271954
+MD5sum: 336e3d98823954d7f3a34996ec325f31
+SHA1: 528907af266a86863e5338561cc186edcc2864f1
+SHA256: 5c87890086fb48c66d51480a6b7ea618060c5abcbd1f63eb4e553b5fddfd73eb
+Homepage: https://github.com/ExeconOne/any-code-fingerprint
+Description: Source-code fingerprinting and similarity search CLI
+ Deterministic code fingerprinting for any programming language.
+
+Package: acf
 Version: 0.1.9
 Architecture: amd64
 Maintainer: ExeconOne <maciej.grula@execon.pl>
