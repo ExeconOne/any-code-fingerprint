@@ -35,6 +35,7 @@ jobs:
       - name: Upload binaries to release
         uses: softprops/action-gh-release@v2
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_unmatched_files: true
           files: |
             artifacts/cli/**/*.tar.gz
@@ -62,6 +63,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: softprops/action-gh-release@v2
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           files: acf_*_amd64.deb
 
       - name: Publish to GitHub Pages APT repo
