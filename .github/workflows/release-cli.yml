@@ -41,3 +41,72 @@ jobs:
           files: |
             artifacts/cli/**/*.tar.gz
             artifacts/cli/**/*.tar.gz.sha256
+
+      - name: Build .deb package
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          mkdir -p deb/DEBIAN deb/usr/local/bin
+          cp artifacts/cli/v${VERSION}/acf-linux-x64 deb/usr/local/bin/acf
+          chmod 755 deb/usr/local/bin/acf
+          {
+            echo "Package: acf"
+            echo "Version: ${VERSION}"
+            echo "Architecture: amd64"
+            echo "Maintainer: ExeconOne <maciej.grula@execon.pl>"
+            echo "Homepage: https://github.com/ExeconOne/any-code-fingerprint"
+            echo "Description: Source-code fingerprinting and similarity search CLI"
+            echo " Deterministic code fingerprinting for any programming language."
+          } > deb/DEBIAN/control
+          dpkg-deb --build deb acf_${VERSION}_amd64.deb
+
+      - name: Upload .deb to release
+        if: matrix.os == 'ubuntu-latest'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: acf_*_amd64.deb
+
+      - name: Publish to GitHub Pages APT repo
+        if: matrix.os == 'ubuntu-latest'
+        env:
+          APT_SIGNING_KEY: ${{ secrets.APT_SIGNING_KEY }}
+          APT_SIGNING_KEY_ID: ${{ secrets.APT_SIGNING_KEY_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          echo "$APT_SIGNING_KEY" | gpg --batch --import
+
+          git clone --branch gh-pages --single-branch \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" \
+            apt-repo
+
+          VERSION=$(node -p "require('./package.json').version")
+          cp acf_${VERSION}_amd64.deb apt-repo/pool/main/
+
+          cd apt-repo
+
+          dpkg-scanpackages --multiversion pool/main \
+            > dists/stable/main/binary-amd64/Packages
+          gzip -k -f dists/stable/main/binary-amd64/Packages
+
+          apt-ftparchive \
+            -o APT::FTPArchive::Release::Origin="ExeconOne" \
+            -o APT::FTPArchive::Release::Label="acf" \
+            -o APT::FTPArchive::Release::Suite="stable" \
+            -o APT::FTPArchive::Release::Codename="stable" \
+            -o APT::FTPArchive::Release::Architectures="amd64" \
+            -o APT::FTPArchive::Release::Components="main" \
+            -o APT::FTPArchive::Release::Description="acf CLI APT repository" \
+            release dists/stable > dists/stable/Release
+
+          gpg --batch --yes --default-key "$APT_SIGNING_KEY_ID" \
+            --clearsign -o dists/stable/InRelease dists/stable/Release
+          gpg --batch --yes --default-key "$APT_SIGNING_KEY_ID" \
+            -abs -o dists/stable/Release.gpg dists/stable/Release
+
+          gpg --armor --export "$APT_SIGNING_KEY_ID" > gpg.key
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "apt: ${{ github.ref_name }}"
+          git push
