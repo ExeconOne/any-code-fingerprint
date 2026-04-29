@@ -1,0 +1,41 @@
+name: Release CLI binaries
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            script: build-mac-cli
+          - os: macos-13
+            script: build-mac-cli
+          - os: ubuntu-latest
+            script: build-linux-cli
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run ${{ matrix.script }}
+
+      - name: Upload binaries to release
+        uses: softprops/action-gh-release@v2
+        with:
+          fail_on_unmatched_files: true
+          files: |
+            artifacts/cli/**/*.tar.gz
+            artifacts/cli/**/*.tar.gz.sha256
