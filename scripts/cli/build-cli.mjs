@@ -88,8 +88,8 @@ const cliContent = readFileSync(cliCjsPath, 'utf8');
 writeFileSync(
   cliCjsPath,
   cliContent.replace(
-    'const EMBEDDED_VERSION = null',
-    `const EMBEDDED_VERSION = '${packageJson.version}'`
+    "'__ACF_VERSION_PLACEHOLDER__'",
+    `'${packageJson.version}'`
   )
 );
 console.log(`[build-cli] injected version ${packageJson.version} into dist/cli.cjs`);
