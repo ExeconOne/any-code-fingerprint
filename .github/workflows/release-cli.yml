@@ -16,8 +16,6 @@ jobs:
         include:
           - os: macos-latest
             script: build-mac-cli
-          - os: macos-13
-            script: build-mac-cli
           - os: ubuntu-latest
             script: build-linux-cli
 
