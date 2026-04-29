@@ -1,0 +1,43 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Architectures: amd64
+Codename: stable
+Components: main
+Date: Wed, 29 Apr 2026 14:23:20 +0000
+Description: acf CLI APT repository
+Label: acf
+Origin: ExeconOne
+Suite: stable
+MD5Sum:
+ 08e7806a29b2da69fdcd2553df6cd207              172 Release
+ 3a1835a90b8c6371b0d06886a3b8665b              503 main/binary-amd64/Packages
+ b57fd98dff070702790b6c0a88cc7252              382 main/binary-amd64/Packages.gz
+SHA1:
+ f0d361698695507be9a0a2ce21e0965800360f83              172 Release
+ 84d3ba230a6c2e2d7bf6306ee1dc95e44dd13c3c              503 main/binary-amd64/Packages
+ a2530df49432c2bbf6ac0ec29b9f7621bfef99ea              382 main/binary-amd64/Packages.gz
+SHA256:
+ d6d44fc4754b3bbed480ec873e28fda1a946c914859206ced756c51ee1d222cc              172 Release
+ b442b99fe16f46a8d68d70dfdf79b7fbfb73bb13b61fd7c05bfca3350da34e60              503 main/binary-amd64/Packages
+ 221791ab6cb09b683f3dc62b5e70a575aa010910361e4608679af7927439efaf              382 main/binary-amd64/Packages.gz
+SHA512:
+ 84ba28f230b5a5bdbe7a9e2a8490e758b4c2e5b3f8d0a06d5e3ee1c3357775e338ee3507ad21f89aa0747a5701db576a8d5ef5d2a3c0140a0f2bab504016c9ae              172 Release
+ 881912509343e35b001c13db076f1d5b9ec854089fa1e925856ef2a9fbbdd71f82c6e121b5fca2fa47913892ddc1612cab01faa7667d8f07cc9627c2fa8ddd20              503 main/binary-amd64/Packages
+ 07f05c9704e75bdb07fdf1b9f33e8ad774bb57f468f33afef784cb89533cb1e11bd7fb73d92e5d8c6ba7febc6c8a8175cdd7618c39ff93c118dcd415212841e8              382 main/binary-amd64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEY5XCdFRZp9CYKHzsay/gBls31asFAmnyFFgACgkQay/gBls3
+1as2Qg//dBmhXdAb+ogdgX3VAHzC5soqOzjMkEUwo3eiWEXdIFAGSRR58xOTZcqx
+E6gZAuboUVu8zsI4aF3CKm6GTXI40TdIHJ8Gihs4mMjz34/fKh+BIvaPA/hDvx/9
+XuVs4aJfCq1TY8ntUcAlDYGOS/BCfX1RJR3jmLFIJb02GP8m9b3vgvm3N4pw9HLL
+EtYZqog6nXZ6BHEr8sV+f4fGX2ttDWm28noFPdBs3fml/1fPA7fI5vYYT9NoaPih
+MIqJhM/6sUtUsJehcWFRvu93MDq85hXsn4H2UpiI2BZHXAXfuiZUMXkCS3rme8lw
+jsLSWHCDgmtUp/KQoxDZAYcXWHifS9jT6h8IgSs7uh/QNjpvEIkGCLValdrfXSy4
+MRPPg/7hui5emNROCYWKGcWEwUjKa/zM8t61FzHPGM7hAqioZjyE80G1WnzxoXGm
+OydOnMURRgORkhBxBHIKTiLV57ziThA6SG6P97C7j0QKNf8TFp1R+T98NPCzlQ6F
+k/GZpEf82PuDuRcpZ4DWbcT27akSd5yEwbnWyL/kWJ8FUNZ9E+mOj9Eeks1X/5eZ
+UlUUyUoQp3DG164hyLRPduguoPED6FyHBv/K1A2sao+X+l8/emfT318+Sks2gtTA
+L8ZlIbsoMMYkC8gHNsb1Po/y2Q8kPfLsu263qPrUKV+hK3Y1uQI=
+=8c50
+-----END PGP SIGNATURE-----
