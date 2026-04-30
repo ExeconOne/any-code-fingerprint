@@ -196,7 +196,7 @@ sudo apt-get install acf
 **macOS (Apple Silicon)**
 
 ```bash
-VERSION=0.1.11
+VERSION=0.1.13
 curl -LO "https://github.com/ExeconOne/any-code-fingerprint/releases/download/v${VERSION}/acf-macos-arm64.tar.gz"
 shasum -a 256 -c acf-macos-arm64.tar.gz.sha256
 tar -xzf acf-macos-arm64.tar.gz
@@ -207,7 +207,7 @@ sudo mv acf-macos-arm64 /usr/local/bin/acf
 **Linux (x64)**
 
 ```bash
-VERSION=0.1.11
+VERSION=0.1.13
 curl -LO "https://github.com/ExeconOne/any-code-fingerprint/releases/download/v${VERSION}/acf-linux-x64.tar.gz"
 shasum -a 256 -c acf-linux-x64.tar.gz.sha256
 tar -xzf acf-linux-x64.tar.gz
