@@ -66,7 +66,7 @@
     "node",
     "browser"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "pkg": "^5.8.1",
     "rollup": "^4.52.4"
